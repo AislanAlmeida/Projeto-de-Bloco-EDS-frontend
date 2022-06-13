@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import FormNovaVaga from '../components/NovaVagaForm.vue'
+import FormNovaVaga from '../components/vagas/NovaVagaForm.vue'
 export default {
   components:{
     FormNovaVaga,

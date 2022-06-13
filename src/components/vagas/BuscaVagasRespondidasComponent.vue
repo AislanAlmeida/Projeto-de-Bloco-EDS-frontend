@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-      <v-row>
+      <v-row class="justify-content-center">
         <v-data-table :items="vagasBuscadas" :headers="headers">
             <template v-slot:[`item.competencias`]="{ item }">
                 <v-btn small color="primary" @click="verCompetenciasVaga(item)">Ver Competencias</v-btn>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import VerCompetencias from './VerCompetencias.vue'
+import VerCompetencias from '../competencias/VerCompetencias.vue'
 export default {
     props:{
         token: String,

@@ -36,20 +36,31 @@
           <VagasRecentes />
         </v-col>
       </v-row>
-      <v-row dense>
-        <v-col cols="12" md="4" v-if="usuario ? usuario.usuario.role == 'admin' : false">
-          <BaseComponent :mensagem="'Quantidade de vagas postadas'" :valor="'90 (valor fake)'" />
-        </v-col>
-        <v-col cols="12" md="4"><BaseComponent :mensagem="'Quantidade de respostas de vagas'" :valor="'350 (valor fake)'"/></v-col>
-        <v-col cols="12" md="4"><BaseComponent :mensagem="'Quantidade de candidatos Cadastrados'" :valor="'800 (valor fake)'"/></v-col>
-        <v-col cols="12" md="4"><BaseComponent :mensagem="'Quantidade de empresas Cadastradas'" :valor="'200 (valor fake)'"/></v-col>
+      <v-row dense v-if="relatorios.quantidade_vagas_criadas">
+      <v-col>
+        <v-card :loading="loading" v-if="usuario ? usuario.usuario.role == 'admin' : false">
+          <v-card-text>
+            <v-row>
+              <v-col cols="12" md="3"><BaseComponent :mensagem="'Quantidade de Vagas criadas'" :valor="relatorios.quantidade_vagas_criadas"/></v-col>
+              <v-col cols="12" md="3"><BaseComponent :mensagem="'Quantidade de Vagas respondidas'" :valor="relatorios.quantidade_vagas_respondidas"/></v-col>
+              <v-col cols="12" md="3"><BaseComponent :mensagem="'Quantidade de Vagas criadas HOJE'" :valor="relatorios.quantidade_vagas_criadas_hoje"/></v-col>
+              <v-col cols="12" md="3"><BaseComponent :mensagem="'Quantidade de Vagas respondidas HOJE'" :valor="relatorios.quantidade_vagas_respondidas_hoje"/></v-col>
+              <v-col cols="12" md="3"><BaseComponent :mensagem="'Quantidade de Usuarios inscritos HOJE'" :valor="relatorios.quantidade_usuarios_inscritos_hoje"/></v-col>
+              <v-col cols="12" md="3"><BaseComponent :mensagem="'Quantidade de Candidatos Cadastradas'" :valor="relatorios.quantidade_usuarios_inscritos.find(u => u.role == 'candidato').qtd"/></v-col>
+              <v-col cols="12" md="3"><BaseComponent :mensagem="'Quantidade de Empresas Cadastrados'" :valor="relatorios.quantidade_usuarios_inscritos.find(u => u.role == 'empresa').qtd"/></v-col>
+              <v-col cols="12" md="3"><BaseComponent :mensagem="'Quantidade de Administradores Cadastrados'" :valor="relatorios.quantidade_usuarios_inscritos.find(u => u.role == 'admin').qtd"/></v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
       </v-row>
+      <!-- {{relatorios}} -->
       </v-container>
     </v-app>
 </template>
 
 <script>
-import VagasRecentes from '@/components/VagasRecentes.vue'
+import VagasRecentes from '@/components/vagas/VagasRecentes.vue'
 import HeaderBanners from '@/components/HeaderBanners.vue'
 import BaseComponent from '@/components/BaseComponent.vue'
 export default {
@@ -57,10 +68,16 @@ export default {
   data(){
     return{
       usuario: null,
+      loading: false,
+      relatorios: {},
     }
   },
+  beforeMount(){
+
+    this.usuario = JSON.parse(sessionStorage.getItem('usuario'));
+  },
   mounted(){
-      this.usuario = JSON.parse(sessionStorage.getItem('usuario'));
+      this.obterRelatorios();
   },
 
   components: {
@@ -70,7 +87,20 @@ export default {
   },
 
   methods:{
-    
+    obterRelatorios(){
+      if(this.usuario){
+        this.loading = true;
+        // this.axios.get('http://10.3.152.220:3001/relatorios',{headers:{'Authorization':`Bearer ${this.usuario.token}`}})
+        this.$axios.get('/relatorios',{headers:{'Authorization':`Bearer ${this.usuario.token}`}})
+        .then(resp => {
+          this.relatorios = resp.data;
+          this.loading = false;
+        }).catch(err =>{
+          console.log(err);
+          this.loading = false;
+        })
+      }
+    }
   }
 }
 </script>

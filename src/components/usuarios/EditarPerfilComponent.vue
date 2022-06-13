@@ -13,8 +13,8 @@
                             <v-text-field dense outlined v-model="usuario.usuario.telefone" label="Telefone *" type="phone" :rules="[regras.obrigatorio]" hint="Apenas números" required></v-text-field>
                             <v-text-field dense outlined v-model="usuario.usuario.endereco" label="Endereco *" type="phone" required></v-text-field>
                             <v-text-field dense outlined v-model="usuario.usuario.cidade" label="Cidade *" type="text" :rules="[regras.obrigatorio]" required></v-text-field>
-                            <v-text-field dense outlined v-model="usuario.usuario.linkedin" label="Linkedin" type="text" :rules="[regras.obrigatorio]"></v-text-field>
-                            <v-text-field dense outlined v-model="usuario.usuario.instagram" label="Instagram" type="text" :rules="[regras.obrigatorio]"></v-text-field>
+                            <v-text-field dense outlined v-model="usuario.usuario.linkedin" label="Linkedin" type="text" ></v-text-field>
+                            <v-text-field dense outlined v-model="usuario.usuario.instagram" label="Instagram" type="text"></v-text-field>
                             <v-select dense outlined :items="['RJ','ES','SP','MG','PR','SC','RS']" label="Estado *" v-model="usuario.usuario.UF" :rules="[regras.obrigatorio]" required></v-select>
                             <v-divider></v-divider>
                             <v-row dense>

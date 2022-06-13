@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="dark">
-    <b-navbar-brand href="/">Ventura RH {{usuario ? ` - ${usuario.usuario.role.toUpperCase()}S` : ''}}</b-navbar-brand>
+    <b-navbar-brand to="/">Ventura RH {{usuario ? ` - ${usuario.usuario.role.toUpperCase()}S` : ''}}</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -18,7 +18,7 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto" v-if="usuario">
 
-
+        <v-btn class="mt-2" outlined small @click="alterarTema()" :dark="!this.$vuetify.theme.dark">{{`Tema ${this.$vuetify.theme.dark ? 'Claro' : 'Escuro'}`}}</v-btn>
         <b-nav-item disabled>{{usuario ? usuario.usuario.nome : ''}}</b-nav-item>
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
@@ -27,6 +27,7 @@
           </template>
           <b-dropdown-item to="/perfil">Perfil</b-dropdown-item>
           <b-dropdown-item @click="logout()">Sair</b-dropdown-item>
+
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -52,6 +53,9 @@ export default {
       sessionStorage.clear();
       this.$router.push('/');
       this.$router.go();
+    },
+    alterarTema(){
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     }
   }
 } 

@@ -4,10 +4,10 @@
         <h2 class="text-center">Adicionando uma competencia</h2>
         <hr>
           {{role}}
-        <v-text-field dense outlined type="text" v-model="competencia.nome" label="Nome da Competência"></v-text-field>
-        <v-text-field dense outlined type="text" v-model="competencia.descricao" label="Descrição da Competência"></v-text-field>
-        <v-select dense outlined :items="perfis" v-model="competencia.perfil" label="Perfil Desejado"></v-select>
-        <v-select dense outlined :items="pesos" v-model="competencia.peso" label="Peso" required></v-select>
+        <v-text-field dense outlined type="text" v-model="competencia.nome" label="Nome da Competência" :rules="rules"></v-text-field>
+        <v-text-field dense outlined type="text" v-model="competencia.descricao" label="Descrição da Competência" :rules="rules"></v-text-field>
+        <v-select dense outlined :items="perfis" v-model="competencia.perfil" label="Perfil Desejado" :rules="rules"></v-select>
+        <v-select dense outlined :items="pesos" v-model="competencia.peso" label="Peso" required :rules="rules"></v-select>
         <v-btn color="primary" @click="salvarCompetencia()">Salvar</v-btn>
       </v-card-text>
   </v-card>
@@ -44,6 +44,7 @@ export default {
                 
             ],
             competencia:new competencia(),
+            rules: [value => !!value || 'Campo obrigatório.'],
         }
     },
     methods:{

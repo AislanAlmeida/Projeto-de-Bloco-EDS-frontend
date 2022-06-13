@@ -2,12 +2,18 @@
   <v-container fluid>
 
       <v-row class="text-center justify-content-center">
-          <h2>Filtros</h2>
-            <v-text-field class="ma-2" v-model="filtros.cidade" outlined dense label="Cidade"></v-text-field>
-            <v-text-field class="ma-2" v-model="filtros.UF" outlined dense label="Estado"></v-text-field>
-            <v-text-field class="ma-2" v-model="filtros.cargo" outlined dense label="Cargo"></v-text-field>
-            <v-select class="ma-2" v-model="filtros.area_atuacao" outlined dense :items="areasAtuacao" label="Área de Atuação"></v-select>
-            <v-select class="ma-2" v-model="filtros.status" outlined dense :items="[{text:'todas',value:''},'ativa','encerrada','expirada','cancelada']" label="Status"></v-select>
+          <v-card>
+              <v-card-text>
+                  <h2>Filtros</h2>
+                  <v-row>
+                      <v-text-field class="ma-2" v-model="filtros.cidade" outlined dense label="Cidade"></v-text-field>
+                      <v-text-field class="ma-2" v-model="filtros.UF" outlined dense label="Estado"></v-text-field>
+                      <v-text-field class="ma-2" v-model="filtros.cargo" outlined dense label="Cargo"></v-text-field>
+                      <v-select class="ma-2" v-model="filtros.area_atuacao" outlined dense :items="areasAtuacao" label="Área de Atuação"></v-select>
+                      <v-select class="ma-2" v-model="filtros.status" outlined dense :items="[{text:'todas',value:''},'ativa','encerrada','expirada','cancelada']" label="Status"></v-select>
+                  </v-row>
+              </v-card-text>
+          </v-card>
       </v-row>
       <v-row class="text-center justify-content-center">
         <v-btn color="primary" class="ma-2" small @click="obterVagas()" :loading="loadingData">Buscar Vagas</v-btn>
@@ -58,7 +64,7 @@
 </template>
 
 <script>
-import VerCompetencias from './VerCompetencias.vue'
+import VerCompetencias from '../competencias/VerCompetencias.vue'
 import VerInscricoes from './VerInscricoes.vue'
 export default {
     props:{

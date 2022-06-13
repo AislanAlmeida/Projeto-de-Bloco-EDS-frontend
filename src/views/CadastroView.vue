@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import CadastroForm from '@/components/CadastroForm.vue'
+import CadastroForm from '@/components/usuarios/CadastroForm.vue'
 export default {
     components:{
         CadastroForm,

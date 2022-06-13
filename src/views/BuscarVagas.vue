@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BuscarVagasComponent from '../components/BuscaVagasComponent.vue'
+import BuscarVagasComponent from '../components/vagas/BuscaVagasComponent.vue'
 export default {
     components:{
         BuscarVagasComponent,

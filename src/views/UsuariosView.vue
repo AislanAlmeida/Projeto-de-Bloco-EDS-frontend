@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import VerUsuariosComponent from "@/components/VerUsuariosComponent.vue"
+import VerUsuariosComponent from "@/components/usuarios/VerUsuariosComponent.vue"
 
 export default {
     components:{

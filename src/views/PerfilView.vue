@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import EditarPerfil from '../components/EditarPerfilComponent.vue'
+import EditarPerfil from '../components/usuarios/EditarPerfilComponent.vue'
 export default {
     components:{
         EditarPerfil
